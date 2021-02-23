@@ -20,6 +20,7 @@
        <div class="weather-box">
          <div class="temp">{{ Math.round(weather.main.temp) }}ºc</div>
          <div class="weather">{{ weather.weather[0].main }}</div>
+         <div class="author">Totoro-Weather 2020 by Marc Eugeni!</div>
        </div>
      </div>
    </main>
@@ -166,6 +167,11 @@ main {
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
 
+}
+
+.weather-box .author {
+  padding: 30px;
+  color: whitesmoke;
 }
 
 </style>
