@@ -5,7 +5,7 @@
        <input 
        type="text" 
        class="search-bar" 
-       placeholder="Welcome to Totoro Weather"
+       placeholder="Totoro dice: Introduce una población"
        v-model="query"
        @keypress="fetchWeather"
        />
@@ -37,11 +37,33 @@ export default {
       api_key: '6c35df700d93402106941f4d54f5a5a1', 
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {}
-
-
+      weather: {},
     }
   },
+    mounted:function() {
+    // On page load
+    let long;
+    let lat;
+    for (var i = 0; i < 2; i++) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          // Fetch weather
+          this.locationFound = true;
+          long = position.coords.longitude;
+          lat = position.coords.latitude;
+          fetch(`${this.url_base}weather?lat=${lat}&lon=${long}&units=metric&APPID=${this.api_key}`)
+              .then(res => {
+                return res.json();
+              }).then(res => {
+                this.setResults(res);
+              });
+          }), (error) => {
+            if (error.code == error.PERMISSION_DENIED) {
+              this.locationFound = false;
+            }
+          };
+      }
+  }},
   methods: {
     fetchWeather (e) {
       if (e.key == "Enter") {
@@ -107,7 +129,7 @@ main {
 .search-box .search-bar {
   display: block;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   color: #313131;
   font-size: 20px;
   appearance: none;
@@ -127,7 +149,7 @@ main {
 }
 
 .location-box .location {
-  padding: 30px;
+  padding: 5px;
   color: #fff;
   font-size: 32px;
   font-weight: 500;
@@ -172,6 +194,27 @@ main {
 .weather-box .author {
   padding: 30px;
   color: whitesmoke;
+}
+
+.button-box {
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  
+
+
+}
+
+.button-box .button {
+  border: wheat;
+  color: #dbdbdb;
+  font-weight: 900;
+  background-color: rgba(0, 0, 0, 0.50);
+  padding: 20px;
+  border-radius: 16px;
+  
 }
 
 </style>
