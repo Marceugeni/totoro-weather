@@ -1,24 +1,4 @@
-# vue-wheatherr
+I deployed the app here: 
+http://totoro-weather.vercel.app
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+####enjoy it!
